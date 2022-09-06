@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
+    "dev": "nodemon app.js",
+    "start": "node app.js",
     "lint": "eslint"
   },
   "keywords": [],
@@ -17,5 +17,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
   }
 }
