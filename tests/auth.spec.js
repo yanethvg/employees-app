@@ -10,8 +10,6 @@ const auth = {
   password: 'secret1234',
 };
 
-// const passwordEncrypted =
-//   '$2b$10$ia7Zaz/uDu.FpOf4F.atkuMlGr..7cJJaz8Lv/T9L39HGkpDSkE1S';
 
 describe('POST /api/signup', () => {
   test('should respond with a 200 status code ', async () => {
@@ -31,15 +29,15 @@ describe('POST /api/signup', () => {
 });
 
 describe('POST /api/signin', () => {
-  // test('should respond with a 200 status code ', async () => {
-  //   const response = await request(app)
-  //     .post('/api/signin')
-  //     .send({
-  //       email: auth.email,
-  //       password: bcrypt.compareSync(passwordEncrypted, auth.password),
-  //     });
-  //   expect(response.statusCode).toBe(200);
-  // });
+  test('should respond with a 200 status code ', async () => {
+    const response = await request(app)
+      .post('/api/signin')
+      .send({
+        email: auth.email,
+        password: auth.password,
+      });
+    expect(response.statusCode).toBe(200);
+  });
   describe('when ', () => {
     // should respond with a 400 code
     test('should respond with a 400 status when fields incomplete', async () => {

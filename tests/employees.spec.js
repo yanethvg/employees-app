@@ -1,5 +1,6 @@
 const { app } = require('./../src/server/server');
 const request = require('supertest');
+require('dotenv').config();
 
 // data for using
 const employeeId = 1;
@@ -11,14 +12,16 @@ const employee = {
   document: '00000000-2',
 };
 
+const token = process.env.TOKEN_TEST;
+
 describe('GET /api/employees', () => {
   test('should respond with a 200 status code ', async () => {
-    const response = await request(app).get('/api/employees').send();
+    const response = await request(app).get('/api/employees').send().set('Authorization', `Bearer ${token}`);
     expect(response.statusCode).toBe(200);
   });
 
   test('should respond with an array', async () => {
-    const response = await request(app).get('/api/employees').send();
+    const response = await request(app).get('/api/employees').send().set('Authorization', `Bearer ${token}`);
     expect(response.body).toBeInstanceOf(Array);
   });
 });
@@ -27,31 +30,31 @@ describe('GET /api/employees/:id', () => {
   test('should respond with a 200 status code ', async () => {
     const response = await request(app)
       .get(`/api/employees/${employeeId}`)
-      .send();
+      .send().set('Authorization', `Bearer ${token}`);
     expect(response.statusCode).toBe(200);
   });
 
   test('should respond with an object', async () => {
     const response = await request(app)
       .get(`/api/employees/${employeeId}`)
-      .send();
+      .send().set('Authorization', `Bearer ${token}`);
     expect(response.body).toBeInstanceOf(Object);
   });
 });
 
 describe('POST /api/employees/', () => {
   test('should respond with a 201 status code ', async () => {
-    const response = await request(app).post(`/api/employees/`).send(employee);
+    const response = await request(app).post(`/api/employees/`).send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.statusCode).toBe(201);
   });
 
   test('should respond with an object', async () => {
-    const response = await request(app).post(`/api/employees/`).send(employee);
+    const response = await request(app).post(`/api/employees/`).send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.body).toBeInstanceOf(Object);
   });
 
   test('should respond with an employee ID', async () => {
-    const response = await request(app).post('/api/employees/').send(employee);
+    const response = await request(app).post('/api/employees/').send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.body.employee.id).toBeDefined();
   });
 
@@ -64,7 +67,7 @@ describe('POST /api/employees/', () => {
       ];
 
       for (const body of BadEmployee) {
-        const response = await request(app).post('/api/employees/').send(body);
+        const response = await request(app).post('/api/employees/').send(body).set('Authorization', `Bearer ${token}`);
         expect(response.statusCode).toBe(400);
       }
     });
@@ -75,21 +78,21 @@ describe('PUT /api/employees/:id', () => {
   test('should respond with a 200 status code ', async () => {
     const response = await request(app)
       .put(`/api/employees/${employeeId}`)
-      .send(employee);
+      .send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.statusCode).toBe(200);
   });
 
   test('should respond with an object', async () => {
     const response = await request(app)
       .put(`/api/employees/${employeeId}`)
-      .send(employee);
+      .send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.body.employee).toBeInstanceOf(Object);
   });
 
   test('should respond with an employee ID', async () => {
     const response = await request(app)
       .put(`/api/employees/${employeeId}`)
-      .send(employee);
+      .send(employee).set('Authorization', `Bearer ${token}`);
     expect(response.body.employee.id).toBeDefined();
   });
 
@@ -100,7 +103,7 @@ describe('PUT /api/employees/:id', () => {
       for (const body of BadEmployee) {
         const response = await request(app)
           .post(`/api/employees/${employeeId}`)
-          .send(body);
+          .send(body).set('Authorization', `Bearer ${token}`);
         expect(response.statusCode).toBe(404);
       }
     });
@@ -109,7 +112,7 @@ describe('PUT /api/employees/:id', () => {
     test('should respond with a 404 status code when id is incorrect', async () => {
       const response = await request(app)
         .post(`/api/employees/${employeeIdWrong}`)
-        .send();
+        .send().set('Authorization', `Bearer ${token}`);
       expect(response.statusCode).toBe(404);
     });
   });
@@ -119,7 +122,7 @@ describe('DELETE /api/employees/:id', () => {
   test('should respond with a 200 status code ', async () => {
     const response = await request(app)
       .delete(`/api/employees/${employeeId}`)
-      .send();
+      .send().set('Authorization', `Bearer ${token}`);
     expect(response.statusCode).toBe(200);
   });
 
@@ -128,7 +131,7 @@ describe('DELETE /api/employees/:id', () => {
     test('should respond with a 404 status code when id is incorrect', async () => {
       const response = await request(app)
         .delete(`/api/employees/${employeeIdWrong}`)
-        .send();
+        .send().set('Authorization', `Bearer ${token}`);
       expect(response.statusCode).toBe(404);
     });
   });
