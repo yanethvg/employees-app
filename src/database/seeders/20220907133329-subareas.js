@@ -1,12 +1,13 @@
 const faker = require('faker');
 
-const subAreas = [...Array(10)].map(() => ({
+let idRandom = 1;
+const subAreas = [...Array(10), idRandom].map(() => ({
   //subarea
   name: faker.commerce.department(),
-  area_id: faker.finance.routingNumber(),
+  area_id: idRandom++,
   createdAt: new Date(),
   updatedAt: new Date(),
-}));
+}, include: "areas"));
 module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('SubAreas', subAreas, {});

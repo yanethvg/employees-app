@@ -7,7 +7,9 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "lint": "eslint",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
+    "sequelize": "npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:seed:all",
+    "migrate": "npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",

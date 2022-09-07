@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // area.associate = function (models) {
-  //   // associations can be defined here
-  // };
+  area.associate = function (models) {
+    area.hasMany(models.SubArea, { as: 'subareas', foreignKey: 'area_id' });
+  };
 
   return area;
 };

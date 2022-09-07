@@ -14,19 +14,19 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      area_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      // area_id: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
     },
     {
       tableName: 'SubAreas',
     }
   );
 
-  // subarea.associate = function (models) {
-  //   // associations can be defined here
-  // };
+  subarea.associate = function (models) {
+    subarea.belongsTo(models.Area, { as: 'areas', foreignKey: 'area_id' });
+  };
 
   return subarea;
 };

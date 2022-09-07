@@ -13,6 +13,11 @@ module.exports = {
       },
       area_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Areas',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

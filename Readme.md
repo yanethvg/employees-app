@@ -24,6 +24,10 @@
 
 10.npx sequelize-cli model:generate --name Employee --attributes document_type:string,document:number,name:string,last_name:string
 
+11. npx sequelize-cli db:seed:undo:all
+
+12. npx sequelize seed:generate --name users
+
 ## Install list:
 
 1. npm i nodemon eslint eslint-config-prettier eslint-plugin-prettier prettier -D
