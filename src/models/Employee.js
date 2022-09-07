@@ -44,10 +44,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      subarea_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
     },
     {
       tableName: 'employees',

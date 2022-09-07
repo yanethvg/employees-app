@@ -1,61 +1,60 @@
 const boom = require('@hapi/boom');
+const { Employee } = require('../models/index');
 
 class EmployeesService {
   constructor() {
-    this.employees = [
-      {
-        id: 1,
-        name: 'Alex',
-        lastname: 'Menedez',
-        type_document: 'DUI',
-        document: '00000000',
-      },
-      {
-        id: 2,
-        name: 'Melina',
-        lastname: 'Menendez',
-        type_document: 'DUI',
-        document: '00000000',
-      },
-    ];
-    this.cantidad = this.employees.length;
+    this.employees = [];
   }
   async create(data) {
-    const newEmployee = {
-      id: this.cantidad++,
-      ...data,
-    };
+    let newEmployee = Employee.build({
+        ...data
+    })
+    newEmployee = await newEmployee.save()
     this.employees.push(newEmployee);
     return newEmployee;
   }
   async find() {
-    return this.employees;
+    return await Employee.findAll();
   }
   async findOne(id) {
-    const employee = this.employees.find((employee) => employee.id == id);
+    const employee = await Employee.find({
+      where:{
+        id
+      }
+    })
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }
     return employee;
   }
   async update(id, changes) {
-    const index = this.employees.findIndex((item) => item.id == id);
-    if (index === -1) {
+    const employee = await Employee.find({
+      where:{
+        id
+      }
+    })
+    if (!employee) {
       throw boom.notFound('Employee not Found');
     }
-    const employee = this.employees[index];
-    this.employees[index] = {
-      ...employee,
-      ...changes,
-    };
-    return this.employees[index];
+    let employeeUpdated = Employee.update(...changes,{where:{
+      id
+    }})
+    return employeeUpdated;
   }
   async delete(id) {
-    const index = this.employees.findIndex((item) => item.id == id);
-    if (index === -1) {
+    const employee = await Employee.find({
+      where:{
+        id
+      }
+    })
+    if (!employee) {
       throw boom.notFound('Employee not Found');
     }
-    this.employees.splice(index, 1);
+    await Employee.destroy({
+      where:{
+        id
+      }
+    })
     id = parseInt(id);
     return id;
   }
