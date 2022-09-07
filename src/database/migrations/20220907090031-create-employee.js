@@ -12,13 +12,21 @@ module.exports = {
         type: Sequelize.STRING,
       },
       document: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       name: {
         type: Sequelize.STRING,
       },
       last_name: {
         type: Sequelize.STRING,
+      },
+      subarea_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'subareas',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

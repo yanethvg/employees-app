@@ -18,15 +18,15 @@
 
 8. npx sequelize-cli model:generate --name User --attributes name:string,last_name:string,email:string,password:string
 
-9.npx sequelize-cli model:generate --name Area --attributes name:string
+9. npx sequelize-cli model:generate --name Area --attributes name:string
 
-10.npx sequelize-cli model:generate --name SubArea --attributes name:string,area_id:number
+10. npx sequelize-cli model:generate --name SubArea --attributes name:string,area_id:number
 
-10.npx sequelize-cli model:generate --name Employee --attributes document_type:string,document:number,name:string,last_name:string
+11. npx sequelize-cli model:generate --name Employee --attributes document_type:string,document:number,name:string,last_name:string
 
-11. npx sequelize-cli db:seed:undo:all
+12. npx sequelize-cli db:seed:undo:all
 
-12. npx sequelize seed:generate --name users
+13. npx sequelize seed:generate --name users
 
 ## Install list:
 

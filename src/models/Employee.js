@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      area_id: {
+      subarea_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -54,9 +54,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // employee.associate = function (models) {
-  //   // associations can be defined here
-  // };
+  employee.associate = function (models) {
+    employee.belongsTo(models.SubArea, { as: 'subareas', foreignKey: 'subarea_id' });
+  };
 
   return employee;
 };

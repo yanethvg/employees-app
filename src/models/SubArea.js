@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
   subarea.associate = function (models) {
     subarea.belongsTo(models.Area, { as: 'areas', foreignKey: 'area_id' });
+    subarea.hasMany(models.Employee, { as: 'subareas', foreignKey: 'subarea_id' });
   };
 
   return subarea;
