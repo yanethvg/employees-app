@@ -1,5 +1,4 @@
 const { app } = require('./../src/server/server');
-// const bcrypt = require('bcrypt');
 const request = require('supertest');
 
 // data for using
