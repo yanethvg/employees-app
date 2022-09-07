@@ -96,6 +96,8 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
+postgres_data/
+
 # Optional npm cache directory
 .npm
 
