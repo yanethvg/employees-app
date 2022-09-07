@@ -7,11 +7,15 @@ class EmployeesService {
         id: 1,
         name: 'Alex',
         lastname: 'Menedez',
+        type_document: 'DUI',
+        document: '00000000',
       },
       {
         id: 2,
         name: 'Melina',
         lastname: 'Menendez',
+        type_document: 'DUI',
+        document: '00000000',
       },
     ];
     this.cantidad = this.employees.length;
@@ -47,12 +51,13 @@ class EmployeesService {
     return this.employees[index];
   }
   async delete(id) {
-    const index = this.employees.findIndex((item) => item.id === id);
+    const index = this.employees.findIndex((item) => item.id == id);
     if (index === -1) {
       throw boom.notFound('Employee not Found');
     }
     this.employees.splice(index, 1);
-    return { id };
+    id = parseInt(id);
+    return id;
   }
 }
 
