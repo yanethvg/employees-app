@@ -7,7 +7,7 @@ const subAreas = [...Array(10), idRandom].map(() => ({
   area_id: idRandom++,
   createdAt: new Date(),
   updatedAt: new Date(),
-}, include: "areas"));
+}));
 module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('SubAreas', subAreas, {});
