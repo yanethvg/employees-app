@@ -12,7 +12,6 @@ const areaTest = {
 describe('GET /api/areas', () => {
   test('should respond with a 200 status code ', async () => {
     const response = await request(app).get('/api/areas').send().set('Authorization', `Bearer ${token}`);
-    console.log(response)
     expect(response.statusCode).toBe(200);
   });
   test('should respond with an array', async () => {

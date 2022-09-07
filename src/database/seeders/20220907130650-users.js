@@ -5,7 +5,7 @@ const authConfig = require('../../config/auth');
 module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert(
-      'Users',
+      'users',
       [
         {
           name: 'Zoila',
@@ -29,6 +29,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('users', null, {});
   },
 };

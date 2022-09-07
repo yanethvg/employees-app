@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SubAreas', {
+    await queryInterface.createTable('subareas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,7 +14,7 @@ module.exports = {
       area_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Areas',
+          model: 'areas',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -31,6 +31,6 @@ module.exports = {
   },
   async down(queryInterface) {
     //, Sequelize
-    await queryInterface.dropTable('SubAreas');
+    await queryInterface.dropTable('subareas');
   },
 };
