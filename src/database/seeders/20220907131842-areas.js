@@ -7,11 +7,23 @@ const Areas = [...Array(10)].map(() => ({
   updatedAt: new Date(),
 }));
 module.exports = {
-  up: (queryInterface) => {
-    return queryInterface.bulkInsert('Areas', Areas, {});
+  up: async (queryInterface) => {
+    await queryInterface.bulkInsert('Areas', Areas, {});
+    const areas = await queryInterface.sequelize.query(
+      `SELECT id from Areas;`
+    );
+    const areasRows = areas[0];
+    // console.log(areasRows);
+    return await queryInterface.bulkInsert('SubAreas',[
+      {name: 'Moda ', area_id: areasRows[0].id,createdAt: new Date(),updatedAt: new Date()},
+      {name: 'Zapatos ', area_id: areasRows[0].id,createdAt: new Date(),updatedAt: new Date()},
+      {name: 'Prestamos', area_id: areasRows[0].id,createdAt: new Date(),updatedAt: new Date()},
+    ], {});
   },
-  down: (queryInterface) => {
+  down: async (queryInterface) => {
     //, Sequelize
-    return queryInterface.bulkDelete('Areas', null, {});
+    await queryInterface.bulkDelete('subareas', null, {});
+    await queryInterface.bulkDelete('Areas', null, {});
+
   },
 };

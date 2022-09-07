@@ -14,10 +14,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      // area_id: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
     },
     {
       tableName: 'SubAreas',
