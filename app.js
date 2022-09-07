@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const { routerApi } = require('./routes');
 
-app.get("/", (req, res) =>{
-  res.send("Testing");
-});
+const port = process.env.PORT || 3000;
+
+//using middleware for seing json
+app.use(express.json());
+
+routerApi(app);
+
 
 app.listen(port, () =>{
   console.log("My port: " + port);
