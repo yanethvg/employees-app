@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlpha: {
-            msg: 'The name can only contain letters',
-          },
           len: {
             args: [2, 255],
             msg: 'The name must be at least two characters',
@@ -21,9 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlpha: {
-            msg: 'The lastname can only contain letters',
-          },
           len: {
             args: [2, 255],
             msg: 'The name must be at least two characters',
@@ -52,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'users',
+      tableName: 'Users',
     }
   );
 

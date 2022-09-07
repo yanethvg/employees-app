@@ -13,6 +13,7 @@ const {
 
 //using middleware for seing json
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //cors
 const whitelist = ['http://localhost:3000'];
