@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { User } = require('../models/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth');
+const authConfig = require('./../config/auth');
 
 class AuthService {
   constructor() {}
@@ -36,6 +36,7 @@ class AuthService {
   }
   async sign_up(data) {
     let { email, name, last_name, password } = data;
+    console.log(authConfig.secret);
     const passwordEncrypt = bcrypt.hashSync(
       password,
       Number.parseInt(authConfig.rounds)

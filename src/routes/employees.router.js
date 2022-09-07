@@ -3,6 +3,7 @@ const employeesRouter = Router();
 
 const { EmployeesService } = require('./../services/employees.service');
 const { validatorHandler } = require('./../middlewares/validator.handler');
+const authHandler = require('./../middlewares/auth.hanlder');
 const {
   createEmployeeSchema,
   updateEmployeeSchema,
@@ -12,13 +13,14 @@ const {
 // I create a instance of EmployeesService
 const service = new EmployeesService();
 
-employeesRouter.get('/', async (req, res) => {
+employeesRouter.get('/', authHandler, async (req, res) => {
   const employees = await service.find();
   res.status(200).json(employees);
 });
 
 employeesRouter.get(
   '/:id',
+  authHandler,
   validatorHandler(getEmployeeSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -36,6 +38,7 @@ employeesRouter.get(
 
 employeesRouter.post(
   '/',
+  authHandler,
   validatorHandler(createEmployeeSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -53,6 +56,7 @@ employeesRouter.post(
 
 employeesRouter.put(
   '/:id',
+  authHandler,
   validatorHandler(getEmployeeSchema, 'params'),
   validatorHandler(updateEmployeeSchema, 'body'),
   async (req, res, next) => {
@@ -73,6 +77,7 @@ employeesRouter.put(
 
 employeesRouter.delete(
   '/:id',
+  authHandler,
   validatorHandler(getEmployeeSchema, 'params'),
   async (req, res, next) => {
     try {
