@@ -14,7 +14,8 @@ const {
 const service = new EmployeesService();
 
 employeesRouter.get('/', authHandler, async (req, res) => {
-  const employees = await service.find();
+  const search = req.query.search;
+  const employees = await service.find(search);
   res.status(200).json(employees);
 });
 
