@@ -1,25 +1,16 @@
 const boom = require('@hapi/boom');
+const { Area } = require('../models/index');
 
 class AreasService {
   constructor() {
-    this.areas = [
-      {
-        id: 1,
-        name: 'Calcetines',
-      },
-      {
-        id: 2,
-        name: 'Zapatos',
-      },
-    ];
-    this.cantidad = this.areas.length;
+    this.areas =[];
   }
 
   async find() {
-    return this.areas;
+    return await Area.findAll({include: ["subareas"], order: [['id', 'ASC']]});
   }
   async findOne(id) {
-    const area = this.areas.find((area) => area.id == id);
+    const area = await Area.findByPk(id);
     if (!area) {
       throw boom.notFound('Area not Found');
     }
