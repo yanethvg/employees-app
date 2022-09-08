@@ -23,6 +23,7 @@ Run ```npx sequelize-cli db:seed:all``` to seed test data to database
 Run ```npm run dev``` to start listening the application
 
 Run tests using ```npm run test``` 
+Run coverage test ```npm run coverage```
 
 
 ### Recomended ```.env``` Content

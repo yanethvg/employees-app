@@ -10,7 +10,8 @@
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
     "sequelize": "npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:seed:all",
     "migrate": "npx sequelize-cli db:migrate",
-    "tinker": "sequelize-tinker --models-path=./src/models/index.js "
+    "tinker": "sequelize-tinker --models-path=./src/models/index.js ",
+    "coverage": "npx jest --coverage"
   },
   "keywords": [],
   "author": "",
