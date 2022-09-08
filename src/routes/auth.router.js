@@ -1,4 +1,6 @@
 const { Router } = require('express');
+require('dotenv').config();
+
 const authRouter = Router();
 const { AuthService } = require('./../services/auth.service');
 const { validatorHandler } = require('./../middlewares/validator.handler');
@@ -14,6 +16,10 @@ authRouter.post(
     try {
       const body = req.body;
       const { token, user } = await service.sign_in(body);
+      res.cookie('jwt', token, {
+          httpOnly: true,
+          maxAge: 24*60*60*1000// 1 day
+      })
       res.status(200).json({
         message: 'authorized',
         token,

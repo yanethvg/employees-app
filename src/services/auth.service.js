@@ -36,7 +36,6 @@ class AuthService {
   }
   async sign_up(data) {
     let { email, name, last_name, password } = data;
-    console.log(authConfig.secret);
     const passwordEncrypt = bcrypt.hashSync(
       password,
       Number.parseInt(authConfig.rounds)
