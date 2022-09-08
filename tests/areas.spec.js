@@ -1,13 +1,26 @@
 const { app } = require('./../src/server/server');
 const request = require('supertest');
-require('dotenv').config();
-const token = process.env.TOKEN_TEST;
+
+const auth = {
+  email: 'admin@admin.app',
+  password: 'secret123',
+};
+
+let token = '';
 
 // data for using
 const areaTest = {
   id: 1,
   name: 'prueba',
 };
+
+beforeAll(async () => {
+  const response = await request(app).post('/api/signin').send({
+    email: auth.email,
+    password: auth.password,
+  });
+  token = response.body.token;
+});
 
 describe('GET /api/areas', () => {
   test('should respond with a 200 status code ', async () => {

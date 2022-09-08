@@ -53,7 +53,6 @@ class EmployeesService {
   }
   async update(id, changes) {
     const employee = await Employee.findByPk(id);
-    // console.log(employee)
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }
