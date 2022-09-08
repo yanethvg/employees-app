@@ -1,39 +1,39 @@
-# Employees App
+# Backend Technical Test 
 
-## Comands:
+## Features
 
-1. npm run dev
+- Auth module for authenticate using JWT as Header and cookies
+- Employee module (create, read, delete, update)
+- Areas module (read) and SubAreas (read)
 
-2. npm run start
+Documentation: [Endpoints documentation](https://documenter.getpostman.com/view/7984452/VVBXwR2F)
 
-3. docker-compose up -d postgres
 
-4. docker-compose down
 
-5. docker-compose ps
+## Installation
 
-6. npx sequelize-cli db:migrate
+Backend API requires [Node.js](https://nodejs.org/) v10+ to run.
 
-7. npx sequelize-cli db:seed:all
 
-8. npx sequelize-cli model:generate --name User --attributes name:string,last_name:string,email:string,password:string
+Fill the ```.env``` file with the data required ```cp .env.example .env```
+Run ```docker-compose up -d``` to create the database 
+Run ```npm i``` to install all dependencies
+Run ```npx sequelize-cli db:migrate``` to migrate sequelize migrations
+Run ```npx sequelize-cli db:seed:all``` to seed test data to database
+Run ```npm run dev``` to start listening the application
 
-9. npx sequelize-cli model:generate --name Area --attributes name:string
+Run tests using ```npm run test``` 
 
-10. npx sequelize-cli model:generate --name SubArea --attributes name:string,area_id:number
 
-11. npx sequelize-cli model:generate --name Employee --attributes document_type:string,document:number,name:string,last_name:string
-
-12. npx sequelize-cli db:seed:undo:all
-
-13. npx sequelize seed:generate --name users
-
-## Install list:
-
-1. npm i nodemon eslint eslint-config-prettier eslint-plugin-prettier prettier -D
-2. npm i express
-3. npm install @hapi/boom [Documentacion](https://hapi.dev/module/boom/api/?v=9.1.4)
-4. npm install joi [Documentacion](https://joi.dev/api/?v=17.6.0)
-5. npm install cors [Documentacion](https://expressjs.com/en/resources/middleware/cors.html)
-6. npm i -D jest supertest [Documentacion](https://dev.to/franciscomendes10866/testing-express-api-with-jest-and-supertest-3gf)
-7.npm install --save-dev sequelize-cli [Documentacion](https://sequelize.org/docs/v6/other-topics/migrations/)
+### Recomended ```.env``` Content
+```
+POSTGRES_DB=employees_webhelp
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=secret
+DB_HOST=localhost
+DB_DIALECT=postgres
+AUTH_SECRET=jwttoken
+AUTH_EXPIRES=24h
+AUTH_ROUNDS=10
+PORT=3000
+```
