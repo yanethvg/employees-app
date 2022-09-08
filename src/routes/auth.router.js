@@ -38,6 +38,10 @@ authRouter.post(
     try {
       const body = req.body;
       const { token, user } = await service.sign_up(body);
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 24*60*60*1000// 1 day
+      })
       res.status(200).json({
         message: 'authorized',
         token,

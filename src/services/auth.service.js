@@ -23,7 +23,6 @@ class AuthService {
         let token = jwt.sign({ user: user }, authConfig.secret, {
           expiresIn: authConfig.expires,
         });
-
         return {
           token,
           user,
