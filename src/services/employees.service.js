@@ -19,7 +19,7 @@ class EmployeesService {
         limit,
         offset,
         include: ['subareas'],
-        order: [['id', 'ASC']],
+        order: [['id', 'DESC']],
       });
     } else {
       return await Employee.findAndCountAll({
@@ -40,7 +40,7 @@ class EmployeesService {
           ],
         },
         include: ['subareas'],
-        order: [['id', 'ASC']],
+        order: [['id', 'DESC']],
       });
     }
   }

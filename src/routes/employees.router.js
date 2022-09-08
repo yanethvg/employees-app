@@ -17,10 +17,10 @@ employeesRouter.get('/', authHandler, async (req, res) => {
   let limit = 10; // number of records per page
   let offset = 0;
   let page = req.query.page || 1;
-  console.log(page); // page number
+
   offset = limit * (page - 1);
   const search = req.query.search;
-  console.log(offset);
+
   const employees = await service.find(search, limit, offset);
   const total = await service.total();
   let pages = Math.ceil(total / limit);
