@@ -13,18 +13,18 @@ class EmployeesService {
     newEmployee = await newEmployee.save();
     return newEmployee;
   }
-  async find(search) {
+  async find(search, limit, offset) {
     if (!search) {
       return await Employee.findAndCountAll({
-        limit: 5,
-        offset: 0,
+        limit,
+        offset,
         include: ['subareas'],
         order: [['id', 'ASC']],
       });
     } else {
       return await Employee.findAndCountAll({
-        limit: 5,
-        offset: 0,
+        limit,
+        offset,
         where: {
           [Op.or]: [
             {
@@ -43,6 +43,9 @@ class EmployeesService {
         order: [['id', 'ASC']],
       });
     }
+  }
+  async total() {
+    return await Employee.count();
   }
   async findOne(id) {
     const employee = await Employee.findByPk(id);
