@@ -15,9 +15,10 @@ class EmployeesService {
   }
   async find(search) {
     if(!search){
-      return await Employee.findAll({ include: ["subareas"], order: [['id', 'ASC']] });
+      return await Employee.findAndCountAll({ limit: 5,offset: 0, include: ["subareas"], order: [['id', 'ASC']] });
     }else{
-      return await Employee.findAll({
+      return await Employee.findAndCountAll({
+        limit: 5,offset: 0,
         where: {
           [Op.or]: [
             { name: {
