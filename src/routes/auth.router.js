@@ -17,9 +17,9 @@ authRouter.post(
       const body = req.body;
       const { token, user } = await service.sign_in(body);
       res.cookie('jwt', token, {
-          httpOnly: true,
-          maxAge: 24*60*60*1000// 1 day
-      })
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
       res.status(200).json({
         message: 'authorized',
         token,
@@ -40,8 +40,8 @@ authRouter.post(
       const { token, user } = await service.sign_up(body);
       res.cookie('jwt', token, {
         httpOnly: true,
-        maxAge: 24*60*60*1000// 1 day
-      })
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
       res.status(200).json({
         message: 'authorized',
         token,
@@ -52,6 +52,13 @@ authRouter.post(
     }
   }
 );
+
+authRouter.post('/logout/', (req, res) => {
+  res.cookie('jwt', '', { maxAge: 0 });
+  res.send({
+    message: 'success',
+  });
+});
 
 module.exports = {
   authRouter,
