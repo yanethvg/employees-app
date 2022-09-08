@@ -22,7 +22,7 @@ employeesRouter.get('/', authHandler, async (req, res) => {
   const search = req.query.search;
 
   const employees = await service.find(search, limit, offset);
-  const total = await service.total();
+  const total = employees.count;
   let pages = Math.ceil(total / limit);
 
   res.status(200).json({

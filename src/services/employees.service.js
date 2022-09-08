@@ -44,9 +44,6 @@ class EmployeesService {
       });
     }
   }
-  async total() {
-    return await Employee.count();
-  }
   async findOne(id) {
     const employee = await Employee.findByPk(id);
     if (!employee) {
