@@ -1,6 +1,6 @@
 const boom = require('@hapi/boom');
 const { Employee } = require('../models/index');
-const { Op } = require("sequelize");
+const { Op } = require('sequelize');
 
 class EmployeesService {
   constructor() {
@@ -8,32 +8,41 @@ class EmployeesService {
   }
   async create(data) {
     let newEmployee = Employee.build({
-        ...data
-    })
-    newEmployee = await newEmployee.save()
+      ...data,
+    });
+    newEmployee = await newEmployee.save();
     return newEmployee;
   }
   async find(search) {
-    if(!search){
-      return await Employee.findAndCountAll({ limit: 5,offset: 0, include: ["subareas"], order: [['id', 'ASC']] });
-    }else{
+    if (!search) {
       return await Employee.findAndCountAll({
-        limit: 5,offset: 0,
+        limit: 5,
+        offset: 0,
+        include: ['subareas'],
+        order: [['id', 'ASC']],
+      });
+    } else {
+      return await Employee.findAndCountAll({
+        limit: 5,
+        offset: 0,
         where: {
           [Op.or]: [
-            { name: {
-                [Op.like]: `%${search}%`
-              }
+            {
+              name: {
+                [Op.like]: `%${search}%`,
+              },
             },
-            { document:  {
-                [Op.like]: `%${search}%`
-              }
-             }
-          ]
-        },include: ["subareas"], order: [['id', 'ASC']]
+            {
+              document: {
+                [Op.like]: `%${search}%`,
+              },
+            },
+          ],
+        },
+        include: ['subareas'],
+        order: [['id', 'ASC']],
       });
     }
-
   }
   async findOne(id) {
     const employee = await Employee.findByPk(id);
@@ -48,12 +57,11 @@ class EmployeesService {
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }
-    let employeeUpdated = Employee.update(
-      changes,
-      {where:{
-        id
-        }
-      })
+    let employeeUpdated = Employee.update(changes, {
+      where: {
+        id,
+      },
+    });
     return employeeUpdated;
   }
   async delete(id) {
@@ -62,10 +70,10 @@ class EmployeesService {
       throw boom.notFound('Employee not Found');
     }
     await Employee.destroy({
-      where:{
-        id
-      }
-    })
+      where: {
+        id,
+      },
+    });
     id = parseInt(id);
     return id;
   }

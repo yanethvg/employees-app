@@ -1,5 +1,6 @@
 const express = require('express');
 var cors = require('cors');
+var cookieParser = require('cookie-parser');
 
 const app = express();
 //routes
@@ -15,18 +16,30 @@ const {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//cors
-const whitelist = ['http://localhost:3000'];
-const options = {
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin) || !origin) {
+var whitelist = ['http://localhost:8000', 'http://localhost:8080'];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('no permitido'));
+      callback(null, false);
     }
   },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200,
+  credentials: true,
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'device-remember-token',
+    'Access-Control-Allow-Origin',
+    'Origin',
+    'Accept',
+  ],
 };
-app.use(cors(options));
+app.use(cors(corsOptions));
+app.use(cookieParser());
 
 routerApi(app);
 
