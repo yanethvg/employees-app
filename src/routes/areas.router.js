@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const areasRouter = Router();
 
-const {AreasService} = require('./../services/areas.service');
+const { AreasService } = require('./../services/areas.service');
 const authHandler = require('./../middlewares/auth.hanlder');
 
 // I create a instance of EmployeesService
@@ -12,7 +12,7 @@ areasRouter.get('/', authHandler, async (req, res) => {
   res.status(200).json(employees);
 });
 
-areasRouter.get('/:id', authHandler, async (req, res,next) => {
+areasRouter.get('/:id', authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
     const area = await service.findOne(id);
@@ -25,6 +25,20 @@ areasRouter.get('/:id', authHandler, async (req, res,next) => {
   }
 });
 
-module.exports ={
-  areasRouter
-}
+areasRouter.get('/subareas/:id', authHandler, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const subareas = await service.findSubAreas(id);
+
+    res.status(200).json({
+      id,
+      subareas,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = {
+  areasRouter,
+};
