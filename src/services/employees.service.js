@@ -10,43 +10,34 @@ class EmployeesService {
         ...data
     })
     newEmployee = await newEmployee.save()
-    this.employees.push(newEmployee);
     return newEmployee;
   }
   async find() {
-    return await Employee.findAll();
+    return await Employee.findAll({ include: ["subareas"] });
   }
   async findOne(id) {
-    const employee = await Employee.find({
-      where:{
-        id
-      }
-    })
+    const employee = await Employee.findByPk(id);
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }
     return employee;
   }
   async update(id, changes) {
-    const employee = await Employee.find({
-      where:{
-        id
-      }
-    })
+    const employee = await Employee.findByPk(id);
+    // console.log(employee)
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }
-    let employeeUpdated = Employee.update(...changes,{where:{
-      id
-    }})
+    let employeeUpdated = Employee.update(
+      changes,
+      {where:{
+        id
+        }
+      })
     return employeeUpdated;
   }
   async delete(id) {
-    const employee = await Employee.find({
-      where:{
-        id
-      }
-    })
+    const employee = await Employee.findByPk(id);
     if (!employee) {
       throw boom.notFound('Employee not Found');
     }

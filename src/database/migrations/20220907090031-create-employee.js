@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      document_type: {
+      type_document: {
         type: Sequelize.STRING,
       },
       document: {
